@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Case Studies | Aashi Pandey</title>
+  <meta name="description" content="Comprehensive project case studies developed by Aashi Pandey across Full-Stack React/Django, Python Data Engineering, AI, and Mobile Android Development.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Header Navigation -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand-link">
+        <span class="brand-avatar">AP</span>
+        <span>Aashi Pandey</span>
+      </a>
+
+      <nav class="main-nav" id="mainNav">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-item">Home</a></li>
+          <li><a href="about.html" class="nav-item">About</a></li>
+          <li><a href="experience.html" class="nav-item">Experience</a></li>
+          <li><a href="projects.html" class="nav-item active">Projects</a></li>
+          <li><a href="contact.html" class="nav-item">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="theme-btn" id="themeBtn" aria-label="Toggle Theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <a href="contact.html" class="cta-btn">Hire Me</a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <section class="page-banner">
+    <div class="container text-center">
+      <h1 class="page-title">Project <span class="gradient-text">Case Studies</span></h1>
+      <p class="page-subtitle" style="margin: 0 auto;">In-depth technical overviews, architectural highlights, and business impact of applications built by Aashi Pandey.</p>
+    </div>
+  </section>
+
+  <main class="section-padding">
+    <div class="container">
+      <!-- Search & Filter Controls -->
+      <div class="project-search-row">
+        <input type="text" class="search-field" id="projectSearch" placeholder="🔍 Search projects by title, technology, or keyword...">
+        <div class="filter-group">
+          <button class="filter-pill active" data-filter="all">All Projects</button>
+          <button class="filter-pill" data-filter="fullstack">Full-Stack & Python</button>
+          <button class="filter-pill" data-filter="ai">AI & LLM</button>
+          <button class="filter-pill" data-filter="mobile">Mobile & Data</button>
+        </div>
+      </div>
+
+      <!-- Comprehensive Projects Grid -->
+      <div class="cards-grid-3" id="projectsGrid">
+
+        <!-- Project 1: LLM Chatbot -->
+        <div class="project-deep-card" data-category="ai fullstack">
+          <div class="project-banner-studio">
+            <span class="badge-category">AI / React / Frontend Architecture</span>
+            <i class="fa-solid fa-brain banner-icon"></i>
+          </div>
+          <div class="project-content-deep">
+            <h3>LLM-Based Chatbot Frontend System</h3>
+            <p class="project-overview">
+              Architected a high-performance ChatGPT-style conversational web interface designed to connect directly with Large Language Model endpoints. Engineered using <strong>React.js, Vite, JavaScript ES6+, Tailwind CSS, and Axios</strong> with real-time response rendering, dynamic syntax highlighting, and secure session state management.
+            </p>
+            <ul class="project-features-list">
+              <li>Responsive ChatGPT-like UI with collapsible sidebar session history</li>
+              <li>Markdown parsing & dynamic code syntax highlighting for 20+ languages</li>
+              <li>Authentication UI (Sign in, Sign up, Token refresh handling)</li>
+              <li>Axios stream interceptors for real-time AI conversation handling</li>
+            </ul>
+            <div class="tech-badges-wrap">
+              <span class="tech-badge">React.js</span>
+              <span class="tech-badge">Vite</span>
+              <span class="tech-badge">JavaScript</span>
+              <span class="tech-badge">Tailwind CSS</span>
+              <span class="tech-badge">Axios</span>
+              <span class="tech-badge">Markdown Parsing</span>
+            </div>
+            <button class="btn-details" onclick="openModal('llm-chatbot')">Read Full Technical Case Study <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- Project 2: AI Electricity Monitoring -->
+        <div class="project-deep-card" data-category="fullstack ai">
+          <div class="project-banner-studio">
+            <span class="badge-category">Python / Django / PostgreSQL / AI</span>
+            <i class="fa-solid fa-bolt banner-icon"></i>
+          </div>
+          <div class="project-body-nude project-content-deep">
+            <h3>AI Electricity Monitoring System</h3>
+            <p class="project-overview">
+              Engineered an intelligent, full-stack energy management dashboard leveraging <strong>Python, Django, PostgreSQL, HTML5, CSS3, JavaScript, and Chart.js</strong>. Offers real-time appliance-wise power tracking, usage forecasting algorithms, and monthly bill estimation tools for efficient power conservation.
+            </p>
+            <ul class="project-features-list">
+              <li>Real-time Chart.js telemetry dashboards for hourly and daily power spikes</li>
+              <li>Appliance-level power breakdown and energy audit tracking logs</li>
+              <li>Predictive algorithm model forecasting monthly electricity bills</li>
+              <li>PostgreSQL indexed data queries with sub-100ms analytics loading</li>
+            </ul>
+            <div class="tech-badges-wrap">
+              <span class="tech-badge">Python</span>
+              <span class="tech-badge">Django</span>
+              <span class="tech-badge">PostgreSQL</span>
+              <span class="tech-badge">Chart.js</span>
+              <span class="tech-badge">HTML/CSS</span>
+              <span class="tech-badge">JavaScript</span>
+            </div>
+            <button class="btn-details" onclick="openModal('electricity-monitor')">Read Full Technical Case Study <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- Project 3: ShelfWise -->
+        <div class="project-deep-card" data-category="fullstack">
+          <div class="project-banner-studio">
+            <span class="badge-category">Python / Django / MySQL</span>
+            <i class="fa-solid fa-book-open banner-icon"></i>
+          </div>
+          <div class="project-content-deep">
+            <h3>ShelfWise – Library Management System</h3>
+            <p class="project-overview">
+              Developed 'ShelfWise', a complete web application built with <strong>Python, Django, MySQL, HTML5, CSS3, and JavaScript</strong> to automate library administration, book cataloging, issue/return logistics, automated fine calculations, role-based access control, and PDF reports.
+            </p>
+            <ul class="project-features-list">
+              <li>Book cataloging, issue, return, and renewal tracking workflows</li>
+              <li>Automated overdue fine computation and payment record keeping</li>
+              <li>Role-based access control (Admin, Librarian, Faculty, Student)</li>
+              <li>Automated PDF inventory summary and financial report generator</li>
+            </ul>
+            <div class="tech-badges-wrap">
+              <span class="tech-badge">Python</span>
+              <span class="tech-badge">Django</span>
+              <span class="tech-badge">MySQL</span>
+              <span class="tech-badge">HTML5</span>
+              <span class="tech-badge">CSS3</span>
+              <span class="tech-badge">JavaScript</span>
+            </div>
+            <button class="btn-details" onclick="openModal('shelfwise')">Read Full Technical Case Study <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- Project 4: Women's Safety App -->
+        <div class="project-deep-card" data-category="mobile ai">
+          <div class="project-banner-studio">
+            <span class="badge-category">Android / Java / Kotlin / Firebase</span>
+            <i class="fa-solid fa-shield-cat banner-icon"></i>
+          </div>
+          <div class="project-content-deep">
+            <h3>Women's Safety Android App with AI Detection</h3>
+            <p class="project-overview">
+              Created a native Android emergency application using <strong>Java/Kotlin, XML, Firebase, Google Maps API, GPS, and SQLite</strong>. Designed to broadcast live GPS coordinates, execute automated panic SOS alerts via SMS/Calls, and utilize AI sensor detection for abnormal movement risks.
+            </p>
+            <ul class="project-features-list">
+              <li>One-tap panic SOS trigger executing instant emergency contact SMS/calls</li>
+              <li>Live GPS coordinate tracking overlayed on Google Maps API</li>
+              <li>AI-based sensor movement risk & fall detection algorithms</li>
+              <li>Firebase real-time sync + SQLite local storage for offline reliability</li>
+            </ul>
+            <div class="tech-badges-wrap">
+              <span class="tech-badge">Java/Kotlin</span>
+              <span class="tech-badge">Android SDK</span>
+              <span class="tech-badge">Firebase</span>
+              <span class="tech-badge">Google Maps API</span>
+              <span class="tech-badge">GPS</span>
+              <span class="tech-badge">SQLite</span>
+            </div>
+            <button class="btn-details" onclick="openModal('womens-safety')">Read Full Technical Case Study <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- Project 5: Doctor Appointment System -->
+        <div class="project-deep-card" data-category="fullstack">
+          <div class="project-banner-studio">
+            <span class="badge-category">Python / Django / MySQL</span>
+            <i class="fa-solid fa-user-doctor banner-icon"></i>
+          </div>
+          <div class="project-content-deep">
+            <h3>Doctor Appointment System</h3>
+            <p class="project-overview">
+              Constructed a multi-user healthcare scheduling platform leveraging <strong>Python, Django, MySQL, HTML5, CSS3, and JavaScript</strong>. Supports patient registration, doctor appointment booking, digital medical history tracking, and secure multi-role authentication.
+            </p>
+            <ul class="project-features-list">
+              <li>Patient registration portal with medical history records</li>
+              <li>Doctor schedule management calendar and slot reservation system</li>
+              <li>Role-based authentication for Doctors, Patients, and Clinic Staff</li>
+              <li>Responsive UI tailored for desktop browsers and clinic kiosks</li>
+            </ul>
+            <div class="tech-badges-wrap">
+              <span class="tech-badge">Python</span>
+              <span class="tech-badge">Django</span>
+              <span class="tech-badge">MySQL</span>
+              <span class="tech-badge">HTML5</span>
+              <span class="tech-badge">CSS3</span>
+              <span class="tech-badge">JavaScript</span>
+            </div>
+            <button class="btn-details" onclick="openModal('doctor-appointment')">Read Full Technical Case Study <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2026 Aashi Pandey. All rights reserved.</p>
+      <a href="#" class="back-to-top">Back to top <i class="fa-solid fa-arrow-up"></i></a>
+    </div>
+  </footer>
+
+  <!-- Modal Overlay -->
+  <div class="modal-overlay" id="projectModal" onclick="closeModalOnBackdrop(event)">
+    <div class="modal-studio-card">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <div class="toast-studio" id="toastNotification">
+    <i class="fa-solid fa-circle-check"></i> <span id="toastMsg">Action completed!</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
