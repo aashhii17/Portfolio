@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { supabase } from '../supabaseClient';
 
-// Set your phone number here (include country code, e.g. 91 for India, no spaces/plus signs)
-const WHATSAPP_NUMBER = "918349071017";
+// Supabase client configuration
 
 export default function Contact({ triggerToast }) {
   const [formData, setFormData] = useState({
@@ -47,33 +47,6 @@ export default function Contact({ triggerToast }) {
     validateField(stateKey, value);
   };
 
-  const handleWhatsAppSend = (e) => {
-    e.preventDefault();
-
-    // Check validation first
-    const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Name is required.';
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required.';
-    } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address.';
-    }
-    if (!formData.subject.trim()) newErrors.subject = 'Subject is required.';
-    if (!formData.message.trim()) newErrors.message = 'Message is required.';
-
-    if (Object.keys(newErrors).some(k => newErrors[k])) {
-      setErrors(newErrors);
-      triggerToast("Please fix the validation errors before sending.");
-      return;
-    }
-
-    const messageText = `Hi Aashi, my name is ${formData.name} (${formData.email}).\n\nSubject: ${formData.subject}\n\nMessage: ${formData.message}`;
-    const encodedText = encodeURIComponent(messageText);
-    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedText}`;
-
-    window.open(waUrl, '_blank');
-    triggerToast("Opening WhatsApp chat...");
-  };
 
   const copyEmail = () => {
     const email = "aashipndy1710@gmail.com";
@@ -86,7 +59,7 @@ export default function Contact({ triggerToast }) {
       });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Check all fields
@@ -108,41 +81,58 @@ export default function Contact({ triggerToast }) {
 
     setSubmitting(true);
 
-    const encode = (data) => {
-      return Object.keys(data)
-        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-        .join("&");
-    };
+    try {
+      // 1. Store in Supabase database
+      const { error } = await supabase
+        .from('contact_messages')
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject,
+            message: formData.message
+          }
+        ]);
 
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({
-        "form-name": "contact",
-        ...formData
-      })
-    })
-      .then((response) => {
-        if (response.ok) {
-          triggerToast("Thank you! Your message has been sent to Aashi.");
-          setFormData({
-            name: '',
-            email: '',
-            subject: '',
-            message: ''
-          });
-          setErrors({});
-        } else {
-          triggerToast("Submission error. Please try sending again.");
-        }
-      })
-      .catch((error) => {
-        triggerToast("Network error. Please check your connection.");
-        console.error("Netlify Form submission error:", error);
-      })
-      .finally(() => {
-        setSubmitting(false);
+      if (error) {
+        throw error;
+      }
+
+      // 2. Submit to Netlify Forms (to send email notifications)
+      const encode = (data) => {
+        return Object.keys(data)
+          .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+          .join("&");
+      };
+
+      try {
+        await fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: encode({
+            "form-name": "contact",
+            ...formData
+          })
+        });
+      } catch (netlifyErr) {
+        console.warn("Netlify Forms submission failed, but message was saved to Supabase:", netlifyErr);
+      }
+
+      triggerToast("Thank you! Your message has been sent to Aashi.");
+
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
       });
+      setErrors({});
+    } catch (error) {
+      triggerToast("Failed to send message. Please try again later.");
+      console.error("Supabase submission error:", error);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -193,7 +183,7 @@ export default function Contact({ triggerToast }) {
           </div>
 
           <div className="contact-right">
-            {/* Netlify Form markup */}
+            {/* Supabase & Netlify Form */}
             <form 
               className="studio-form" 
               id="contactForm" 
@@ -201,7 +191,7 @@ export default function Contact({ triggerToast }) {
               data-netlify="true"
               name="contact"
             >
-              {/* Form-name input for Netlify */}
+              {/* Form-name input for Netlify Form submissions and emails */}
               <input type="hidden" name="form-name" value="contact" />
               
               <div className="form-2col" style={{ marginBottom: errors.name || errors.email ? '0.5rem' : '1.5rem' }}>
@@ -274,15 +264,7 @@ export default function Contact({ triggerToast }) {
               
               <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                 <button type="submit" className="btn btn-primary" style={{ flex: 1, minWidth: '150px' }} disabled={submitting}>
-                  <i className="fa-solid fa-paper-plane"></i> {submitting ? 'Sending...' : 'Send via Email'}
-                </button>
-                <button 
-                  type="button" 
-                  onClick={handleWhatsAppSend} 
-                  className="btn btn-outline" 
-                  style={{ flex: 1, minWidth: '150px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', borderColor: '#25D366' }}
-                >
-                  <i className="fa-brands fa-whatsapp" style={{ color: '#25D366', fontSize: '1.25rem' }}></i> Send via WhatsApp
+                  <i className="fa-solid fa-paper-plane"></i> {submitting ? 'Sending...' : 'Send Message'}
                 </button>
               </div>
             </form>
