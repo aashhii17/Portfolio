@@ -166,6 +166,53 @@ export default function About() {
             </div>
           </div>
         </div>
+
+        {/* Research Publication Section */}
+        <div className="section-header-wrap" style={{ marginTop: '4rem' }}>
+          <span className="section-subtitle">SCHOLARLY WORK</span>
+          <h2>Research & <span className="gradient-text">Publications</span></h2>
+        </div>
+
+        <div className="studio-card" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem', border: '1px solid var(--border-color)', marginBottom: '4rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
+            <div>
+              <span className="file-tag" style={{ background: 'var(--accent-subtle)', color: 'var(--accent-primary)', padding: '0.2rem 0.6rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 700 }}>
+                IJCOPE Journal (May 2026)
+              </span>
+              <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.35rem', fontWeight: 800, margin: '0.6rem 0 0.4rem', color: 'var(--text-primary)' }}>
+                Panic Button for Women Safety Using IoT and GPS
+              </h3>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', margin: 0, fontWeight: 500 }}>
+                Co-authors: Kavya K.B, Deepshikha Sajankar, Aashi Pandey, Reeta Koranga | Advisor: Asst. Prof. Rakesh Jain
+              </p>
+            </div>
+            
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <span style={{ background: 'var(--bg-subtle)', border: '1px solid var(--border-color)', padding: '0.25rem 0.5rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+                ISSN: 3108-1754
+              </span>
+              <span style={{ background: 'var(--bg-subtle)', border: '1px solid var(--border-color)', padding: '0.25rem 0.5rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+                Impact Factor: 3.5
+              </span>
+            </div>
+          </div>
+
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.7', margin: 0 }}>
+            Published in the <strong>International Journal of Creative and Open Research in Engineering and Management (IJCOPE)</strong>, Vol 02, Issue 05. The paper presents an intelligent, IoT-based emergency safety system designed to provide immediate assistance. The proposed system integrates GPS tracking, an ESP32 microcontroller, internet/SMS gateways, and a custom Android smartphone application to broadcast live location coordinates to trusted contacts and emergency dispatch portals in under 2 seconds.
+          </p>
+
+          <div style={{ marginTop: '0.5rem' }}>
+            <a 
+              href="https://ijcope.org/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="btn btn-outline" 
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', padding: '0.5rem 1rem' }}
+            >
+              <i className="fa-solid fa-arrow-up-right-from-square"></i> Visit IJCOPE Journal Portal
+            </a>
+          </div>
+        </div>
       </div>
     </main>
   );

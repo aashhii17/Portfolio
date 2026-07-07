@@ -49,28 +49,8 @@ export default function Home({ triggerToast }) {
       });
   };
 
-  // Live activity states
-  const activities = [
-    "Refining EcoWatt telemetry dashboard",
-    "Connecting AIStudio to OpenRouter models",
-    "Optimizing ShelfWise library queries",
-    "Updating GuardianAI location broadcast logs",
-    "Reviewing PySpark ETL cloud jobs",
-    "Configuring Databricks workspace tasks",
-    "Writing high-performance React code"
-  ];
-  const [liveActivity, setLiveActivity] = useState(activities[0]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setLiveActivity(prev => {
-        const remaining = activities.filter(a => a !== prev);
-        const rand = Math.floor(Math.random() * remaining.length);
-        return remaining[rand];
-      });
-    }, 4500);
-    return () => clearInterval(interval);
-  }, []);
+  // Live activity state (statically set to the Alaski AI task)
+  const liveActivity = "Connecting Alaski AI to OpenRouter models";
 
   // CLI Terminal states & logic
   const [terminalHistory, setTerminalHistory] = useState([
@@ -113,7 +93,8 @@ export default function Home({ triggerToast }) {
       case 'skills':
         response = [
           "Languages: Python, JavaScript (ES6+), Java, SQL",
-          "Backend/ETL: Django, Apache PySpark, Databricks, REST APIs",
+          "Backend/Database: Django, Supabase, REST APIs",
+          "Data/ETL: Apache PySpark, Databricks, SQL Databases",
           "Frontend: React.js, Tailwind CSS, HTML5/CSS3",
           "Cloud/Tools: AWS Cloud, Firebase, Power BI, Git"
         ];
@@ -121,9 +102,9 @@ export default function Home({ triggerToast }) {
       case 'projects':
         response = [
           "Core Projects:",
-          "  • AIStudio: Multi-LLM MERN chatbot with API streaming",
-          "  • EcoWatt: Django energy forecast analytics platform",
-          "  • ShelfWise: Normalized MySQL library issue tracker",
+          "  • Alaski AI: Multi-LLM MERN chatbot with API streaming",
+          "  • EcoWatt: Django energy forecast platform with 10K+ logs",
+          "  • ShelfWise: MySQL library tracker (10K+ book entries)",
           "  • GuardianAI: Android offline-resilient SOS assistant",
           "  • Medislot: Multi-user doctor schedule booker"
         ];
@@ -144,17 +125,18 @@ export default function Home({ triggerToast }) {
     setTerminalInput('');
   };
 
-  // Get first 3 projects for preview
-  const featuredProjects = projectsData.slice(0, 3);
+  // Get highlighted projects for preview (Alaski AI, EcoWatt, Medislot)
+  const highlightedIds = ["aistudio", "electricity-monitor", "doctor-appointment"];
+  const featuredProjects = projectsData.filter(p => highlightedIds.includes(p.id));
 
   return (
     <main className="page-fade-in">
-      {/* Hero Section */}
+      {/* Hero Section - Simplified & Cleaned Up */}
       <section className="hero-home">
         <div className="container hero-grid">
           <div className="hero-text-block">
             <div className="badge-status">
-              <span className="dot-green"></span> Open to Full Stack, Python & Data Engineering Roles
+              <span className="dot-green"></span> Building AI Apps & Web Platforms
             </div>
 
             <h1 className="hero-title">
@@ -168,7 +150,7 @@ export default function Home({ triggerToast }) {
             </div>
 
             <p className="hero-bio">
-              <strong>B.Tech Information Technology Graduate (2022–2026)</strong> specializing in building full-stack web applications with <strong>Python, Django, React.js</strong>, and distributed data processing pipelines using <strong>Apache PySpark, Databricks, AWS, and SQL</strong>.
+              <strong>B.Tech Information Technology Graduate (2022–2026)</strong> specializing in building full-stack web applications with <strong>Python, Django, React.js, Supabase</strong>, and distributed data processing pipelines using <strong>Apache PySpark, Databricks, AWS, and SQL</strong>.
             </p>
 
             <div className="hero-cta-flex">
@@ -184,13 +166,44 @@ export default function Home({ triggerToast }) {
           </div>
 
           <div className="hero-card-side">
-            <div className="profile-card-studio">
+            {/* Minimal Code Mockup Visual - Clean Landing */}
+            <div className="profile-card-studio" style={{ margin: 0 }}>
               <div className="card-top">
                 <span className="file-tag">aashi_pandey.py</span>
-                <span className="active-pill"><i className="fa-solid fa-circle-check"></i> Available</span>
+                <span className="active-pill"><i className="fa-solid fa-code-branch"></i> Open to Opportunities</span>
               </div>
 
-              <div className="profile-header">
+              <div className="code-box-studio" style={{ marginTop: '1.5rem' }}>
+                <div className="code-line"><span className="kw">class</span> <span className="cls">AashiPandey</span>:</div>
+                <div className="code-line indent-1">focus = <span className="str">["MERN Developer", "Full Stack Development", "Python", "Data Engineering"]</span></div>
+                <div className="code-line indent-1">degree = <span className="str">"B.Tech in IT (Graduated 2026) · Grade A"</span></div>
+                <div className="code-line indent-1">publications = <span className="str">"Panic Button for Women Safety Using IoT & GPS"</span></div>
+                <div className="code-line indent-1">email = <span className="str">"aashipndy1710@gmail.com"</span></div>
+                <div className="code-line indent-1">github = <span className="str">"github.com/aashhii17"</span></div>
+                <div className="code-line indent-1">linkedin = <span className="str">"linkedin.com/in/aashi-pandey-1324b025b"</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Developer Console & Insights Section - Revealed as User Scrolls */}
+      <section className="section-padding" style={{ borderBottom: '1px solid var(--border-color)', borderTop: '1px solid var(--border-color)', background: 'var(--bg-surface)' }}>
+        <div className="container">
+          <div className="section-header-wrap">
+            <span className="section-subtitle">INTERACTIVE PORTAL</span>
+            <h2>Developer <span className="gradient-text">Console & Insights</span></h2>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem', alignItems: 'start', marginTop: '2.5rem' }}>
+            {/* Detailed Profile Summary */}
+            <div className="profile-card-studio" style={{ margin: 0, height: '100%' }}>
+              <div className="card-top">
+                <span className="file-tag">developer_stats.json</span>
+                <span className="active-pill" style={{ background: 'var(--accent-subtle)', color: 'var(--accent-primary)' }}><i className="fa-solid fa-circle-nodes"></i> Building AI Applications</span>
+              </div>
+
+              <div className="profile-header" style={{ marginTop: '1.2rem' }}>
                 <div className="avatar-sq">AP</div>
                 <div className="profile-info">
                   <h3>Aashi Pandey</h3>
@@ -199,34 +212,27 @@ export default function Home({ triggerToast }) {
                 </div>
               </div>
 
-              <div className="chips-row">
+              <div className="chips-row" style={{ marginTop: '1.5rem' }}>
                 <span className="chip-tag"><i className="fa-brands fa-python"></i> Python</span>
                 <span className="chip-tag"><i className="fa-solid fa-cubes"></i> Django</span>
                 <span className="chip-tag"><i className="fa-brands fa-react"></i> React.js</span>
+                <span className="chip-tag"><i className="fa-solid fa-server"></i> Supabase</span>
                 <span className="chip-tag"><i className="fa-solid fa-layer-group"></i> MERN Stack</span>
                 <span className="chip-tag"><i className="fa-solid fa-fire"></i> PySpark</span>
                 <span className="chip-tag"><i className="fa-brands fa-aws"></i> AWS</span>
                 <span className="chip-tag"><i className="fa-solid fa-database"></i> SQL</span>
               </div>
 
-              <div className="code-box-studio">
-                <div className="code-line"><span className="kw">class</span> <span className="cls">AashiPandey</span>:</div>
-                <div className="code-line indent-1">degree = <span className="str">"B.Tech in IT (Graduated 2022-2026) · Grade A"</span></div>
-                <div className="code-line indent-1">email = <span className="str">"aashipndy1710@gmail.com"</span></div>
-                <div className="code-line indent-1">github = <span className="str">"github.com/aashhii17"</span></div>
-                <div className="code-line indent-1">linkedin = <span className="str">"linkedin.com/in/aashi-pandey-1324b025b"</span></div>
-              </div>
-
-              <div className="live-status-bar" style={{ marginTop: '1.2rem', padding: '0.75rem 1rem', background: 'var(--bg-subtle)', borderRadius: '8px', border: '1px solid var(--border-color)', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+              <div className="live-status-bar" style={{ marginTop: '2rem', padding: '0.75rem 1rem', background: 'var(--bg-subtle)', borderRadius: '8px', border: '1px solid var(--border-color)', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                 <span className="live-dot"></span>
                 <span className="live-indicator">
-                  Active task: <strong style={{ color: 'var(--accent-primary)', marginLeft: '0.2rem' }}>{liveActivity}</strong>
+                  Current activity: <strong style={{ color: 'var(--accent-primary)', marginLeft: '0.2rem' }}>{liveActivity}</strong>
                 </span>
               </div>
             </div>
 
             {/* CLI Developer Terminal */}
-            <div className="cli-terminal">
+            <div className="cli-terminal" style={{ margin: 0, height: '100%', display: 'flex', flexDirection: 'column' }}>
               <div className="terminal-header">
                 <div className="terminal-dots">
                   <span className="terminal-dot red"></span>
@@ -235,14 +241,14 @@ export default function Home({ triggerToast }) {
                 </div>
                 <span className="terminal-title">aashi-developer-console</span>
               </div>
-              <div className="terminal-body">
+              <div className="terminal-body" style={{ flex: 1, minHeight: '260px' }}>
                 {terminalHistory.map((line, idx) => (
-                  <div key={idx} className="terminal-line" style={{ color: line.type === 'command' ? '#10b981' : line.type === 'system' ? '#f59e0b' : '#38bdf8' }}>
+                  <div key={idx} className="terminal-line" style={{ color: line.type === 'command' ? '#10b981' : line.type === 'system' ? '#f59e0b' : '#38bdf8', marginBottom: '0.4rem', fontSize: '0.85rem' }}>
                     {line.text}
                   </div>
                 ))}
-                <form onSubmit={handleTerminalSubmit} className="terminal-input-row">
-                  <span>visitor@aashi-portfolio:~$</span>
+                <form onSubmit={handleTerminalSubmit} className="terminal-input-row" style={{ display: 'flex', alignItems: 'center' }}>
+                  <span style={{ fontSize: '0.85rem', color: '#10b981', marginRight: '0.4rem' }}>visitor@aashi-portfolio:~$</span>
                   <input 
                     type="text" 
                     className="terminal-input" 
@@ -250,6 +256,7 @@ export default function Home({ triggerToast }) {
                     onChange={(e) => setTerminalInput(e.target.value)}
                     autoComplete="off"
                     aria-label="Terminal input"
+                    style={{ flex: 1, background: 'transparent', border: 'none', color: '#38bdf8', outline: 'none', fontFamily: 'monospace', fontSize: '0.85rem' }}
                   />
                 </form>
                 <div ref={terminalEndRef} />
@@ -269,19 +276,19 @@ export default function Home({ triggerToast }) {
 
           <div className="cards-grid-3">
             <div className="studio-card">
-              <div className="studio-card-icon"><i class="fa-solid fa-layer-group"></i></div>
+              <div className="studio-card-icon"><i className="fa-solid fa-layer-group"></i></div>
               <h3>Full-Stack Web Development</h3>
               <p>Architecting full-stack web applications with Python & Django backend RESTful services, combined with high-performance React.js frontends and database models.</p>
             </div>
 
             <div className="studio-card">
-              <div className="studio-card-icon"><i class="fa-solid fa-network-wired"></i></div>
+              <div className="studio-card-icon"><i className="fa-solid fa-network-wired"></i></div>
               <h3>Data Engineering & Cloud</h3>
               <p>Designing scalable ETL pipelines, processing large-scale datasets with Apache PySpark, Databricks, and AWS to automate cloud data workflows.</p>
             </div>
 
             <div className="studio-card">
-              <div className="studio-card-icon"><i class="fa-solid fa-chart-pie"></i></div>
+              <div className="studio-card-icon"><i className="fa-solid fa-chart-pie"></i></div>
               <h3>Data Analytics & Insights</h3>
               <p>Performing statistical data cleaning, SQL relational database querying, exploratory data analysis (EDA), and interactive dashboard creation using Power BI and Chart.js.</p>
             </div>
@@ -299,12 +306,14 @@ export default function Home({ triggerToast }) {
 
           <div className="cards-grid-3">
             {featuredProjects.map((project) => (
-              <div key={project.id} className="studio-card">
-                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', marginBottom: '0.6rem' }}>{project.title}</h3>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1.2rem' }}>
-                  {project.overview.length > 200 ? project.overview.slice(0, 197) + '...' : project.overview}
-                </p>
-                <Link to="/projects" className="btn-details">
+              <div key={project.id} className="studio-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div>
+                  <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', marginBottom: '0.6rem', color: 'var(--text-primary)' }}>{project.title}</h3>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1.2rem', lineHeight: '1.6' }}>
+                    {project.overview.length > 200 ? project.overview.slice(0, 197) + '...' : project.overview}
+                  </p>
+                </div>
+                <Link to={`/projects?id=${project.id}`} className="btn-details" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontWeight: 600, fontSize: '0.9rem' }}>
                   View Full Case Study <i className="fa-solid fa-arrow-right"></i>
                 </Link>
               </div>
@@ -313,12 +322,71 @@ export default function Home({ triggerToast }) {
         </div>
       </section>
 
+      {/* Research & Publications Section */}
+      <section className="section-padding" style={{ background: 'var(--bg-surface)', borderBottom: '1px solid var(--border-color)' }}>
+        <div className="container">
+          <div className="section-header-wrap">
+            <span className="section-subtitle">SCHOLARLY WORK</span>
+            <h2>Research & <span className="gradient-text">Publications</span></h2>
+          </div>
+
+          <div className="studio-card" style={{ padding: '2.2rem', display: 'flex', flexDirection: 'column', gap: '1.2rem', border: '1px solid var(--border-color)', marginTop: '2.5rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
+              <div>
+                <span className="file-tag" style={{ background: 'var(--accent-subtle)', color: 'var(--accent-primary)', padding: '0.25rem 0.75rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: 700 }}>
+                  IJCOPE Journal (May 2026)
+                </span>
+                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', fontWeight: 800, margin: '0.8rem 0 0.4rem', color: 'var(--text-primary)' }}>
+                  Panic Button for Women Safety Using IoT and GPS
+                </h3>
+                <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', margin: 0, fontWeight: 500 }}>
+                  Co-authors: Kavya K.B, Deepshikha Sajankar, Aashi Pandey, Reeta Koranga | Advisor: Asst. Prof. Rakesh Jain
+                </p>
+              </div>
+              
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                <span style={{ background: 'var(--bg-subtle)', border: '1px solid var(--border-color)', padding: '0.3rem 0.6rem', borderRadius: '6px', fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+                  ISSN: 3108-1754
+                </span>
+                <span style={{ background: 'var(--bg-subtle)', border: '1px solid var(--border-color)', padding: '0.3rem 0.6rem', borderRadius: '6px', fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+                  Impact Factor: 3.5
+                </span>
+              </div>
+            </div>
+
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.94rem', lineHeight: '1.8', margin: 0 }}>
+              Published in the <strong>International Journal of Creative and Open Research in Engineering and Management (IJCOPE)</strong>. The research introduces an intelligent IoT safety system powered by GPS, an ESP32 microcontroller, and a custom Android client. The system transmits emergency SOS alerts and real-time location metrics to trusted contacts in under 2 seconds during critical situations.
+            </p>
+
+            <div style={{ marginTop: '0.5rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <a 
+                href="https://ijcope.org/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="btn btn-outline" 
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', padding: '0.5rem 1rem' }}
+              >
+                <i className="fa-solid fa-arrow-up-right-from-square"></i> Visit IJCOPE Journal Portal
+              </a>
+              <Link 
+                to="/about" 
+                className="btn btn-outline"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', padding: '0.5rem 1rem' }}
+              >
+                <i className="fa-solid fa-user"></i> View Academic Background
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
       {/* Callout */}
       <section className="section-padding">
         <div className="container">
           <div className="studio-card text-center" style={{ padding: '3.5rem 2rem' }}>
-            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.2rem', marginBottom: '0.8rem' }}>Ready to collaborate or discuss an opportunity?</h2>
-            <p style={{ color: 'var(--text-secondary)', maxWidth: '620px', margin: '0 auto 2rem' }}>
+            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.2rem', marginBottom: '0.8rem', color: 'var(--text-primary)' }}>Ready to collaborate or discuss an opportunity?</h2>
+            <p style={{ color: 'var(--text-secondary)', maxWidth: '620px', margin: '0 auto 2rem', lineHeight: '1.6' }}>
               Review my complete career timeline, deep-dive into project technical architectures, or connect directly with me.
             </p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>

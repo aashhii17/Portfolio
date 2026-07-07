@@ -1,14 +1,14 @@
 export const projectsData = [
   {
     id: "aistudio",
-    title: "AIStudio – Multi-LLM Chatbot Platform",
+    title: "Alaski AI – Multi-LLM Chatbot Platform",
     category: "ai fullstack",
     badgeLabel: "AI / MERN Stack / OpenRouter",
     categoryLabel: "AI / MERN Stack / Full-Stack",
     iconClass: "fa-solid fa-brain",
     repoUrl: "https://github.com/aashhii17/AIStudio",
     overview: "Developed a full-stack, AI-powered conversational chatbot platform using the MERN (MongoDB, Express.js, React.js, Node.js) stack and the OpenRouter API. Built to support secure user authentication, real-time message streaming, conversation history database storage, and a responsive interface enabling interactions with multiple advanced Large Language Models.",
-    problemSolved: "Centralizing access to multiple LLMs requires secure authentication, low-latency streaming responses, and reliable session persistence. AIStudio integrates these into a unified, responsive interface that eliminates chat fragmentation.",
+    problemSolved: "Centralizing access to multiple LLMs requires secure authentication, low-latency streaming responses, and reliable session persistence. Alaski AI integrates these into a unified, responsive interface that eliminates chat fragmentation.",
     architectureDetails: [
       "MERN Stack Integration: Utilized React.js for the dynamic front-end client and Node.js/Express.js for the server-side logic and API layer.",
       "OpenRouter API: Integrated OpenRouter API to allow real-time selection and execution of queries across diverse LLMs.",

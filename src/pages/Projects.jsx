@@ -68,6 +68,168 @@ export default function Projects({ triggerToast }) {
     return matchesCategory && matchesSearch;
   });
 
+  const renderArchitectureDiagram = (projectId) => {
+    switch (projectId) {
+      case 'aistudio':
+        return (
+          <div className="arch-diagram-section">
+            <h4 className="arch-diagram-title">
+              <i className="fa-solid fa-diagram-project" style={{ color: 'var(--accent-primary)' }}></i> System & API Architecture Flow
+            </h4>
+            <div className="arch-diagram-box">
+              <div className="arch-flow-row">
+                <div className="arch-step-node">
+                  <strong>User Client</strong>
+                  <span>React.js / Axios</span>
+                </div>
+                <div className="arch-step-arrow"><i className="fa-solid fa-arrow-right"></i></div>
+                <div className="arch-step-node">
+                  <strong>API Gateway</strong>
+                  <span>Express.js / JWT Auth</span>
+                </div>
+                <div className="arch-step-arrow"><i className="fa-solid fa-arrow-right"></i></div>
+                <div className="arch-step-node">
+                  <strong>Router / Controller</strong>
+                  <span>Node.js / OpenRouter API</span>
+                </div>
+                <div className="arch-step-arrow"><i className="fa-solid fa-arrow-right"></i></div>
+                <div className="arch-step-node">
+                  <strong>Database / LLM</strong>
+                  <span>MongoDB (History) / 8+ LLMs</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      case 'electricity-monitor':
+        return (
+          <div className="arch-diagram-section">
+            <h4 className="arch-diagram-title">
+              <i className="fa-solid fa-diagram-project" style={{ color: 'var(--accent-primary)' }}></i> Data Pipeline & Forecast Flow
+            </h4>
+            <div className="arch-diagram-box">
+              <div className="arch-flow-row">
+                <div className="arch-step-node">
+                  <strong>Usage Logs</strong>
+                  <span>10K+ Telemetry Records</span>
+                </div>
+                <div className="arch-step-arrow"><i className="fa-solid fa-arrow-right"></i></div>
+                <div className="arch-step-node">
+                  <strong>ETL Parser</strong>
+                  <span>Django background tasks</span>
+                </div>
+                <div className="arch-step-arrow"><i className="fa-solid fa-arrow-right"></i></div>
+                <div className="arch-step-node">
+                  <strong>Aggregated DB</strong>
+                  <span>PostgreSQL (25+ Tables)</span>
+                </div>
+                <div className="arch-step-arrow"><i className="fa-solid fa-arrow-right"></i></div>
+                <div className="arch-step-node">
+                  <strong>Predictive UI</strong>
+                  <span>ML bill estimation / Chart.js</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      case 'shelfwise':
+        return (
+          <div className="arch-diagram-section">
+            <h4 className="arch-diagram-title">
+              <i className="fa-solid fa-diagram-project" style={{ color: 'var(--accent-primary)' }}></i> RBAC System Architecture Flow
+            </h4>
+            <div className="arch-diagram-box">
+              <div className="arch-flow-row">
+                <div className="arch-step-node">
+                  <strong>Member UI Portal</strong>
+                  <span>500+ Active Accounts</span>
+                </div>
+                <div className="arch-step-arrow"><i className="fa-solid fa-arrow-right"></i></div>
+                <div className="arch-step-node">
+                  <strong>Access Guard</strong>
+                  <span>Django Role RBAC</span>
+                </div>
+                <div className="arch-step-arrow"><i className="fa-solid fa-arrow-right"></i></div>
+                <div className="arch-step-node">
+                  <strong>Relational Schema</strong>
+                  <span>MySQL (Foreign Key Constraints)</span>
+                </div>
+                <div className="arch-step-arrow"><i className="fa-solid fa-arrow-right"></i></div>
+                <div className="arch-step-node">
+                  <strong>Action Engines</strong>
+                  <span>Cron Fines / ReportLab PDFs</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      case 'womens-safety':
+        return (
+          <div className="arch-diagram-section">
+            <h4 className="arch-diagram-title">
+              <i className="fa-solid fa-diagram-project" style={{ color: 'var(--accent-primary)' }}></i> SOS Dispatch Flow
+            </h4>
+            <div className="arch-diagram-box">
+              <div className="arch-flow-row">
+                <div className="arch-step-node">
+                  <strong>Emergency Input</strong>
+                  <span>One-Tap Trigger / Accelerometer</span>
+                </div>
+                <div className="arch-step-arrow"><i className="fa-solid fa-arrow-right"></i></div>
+                <div className="arch-step-node">
+                  <strong>SOS Dispatcher</strong>
+                  <span>GPS location sync under 2s</span>
+                </div>
+                <div className="arch-step-arrow"><i className="fa-solid fa-arrow-right"></i></div>
+                <div className="arch-step-node">
+                  <strong>Maps Display</strong>
+                  <span>Google Maps SDK integration</span>
+                </div>
+                <div className="arch-step-arrow"><i className="fa-solid fa-arrow-right"></i></div>
+                <div className="arch-step-node">
+                  <strong>Dual Cache</strong>
+                  <span>Firebase / SQLite Offline Backup</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      case 'doctor-appointment':
+        return (
+          <div className="arch-diagram-section">
+            <h4 className="arch-diagram-title">
+              <i className="fa-solid fa-diagram-project" style={{ color: 'var(--accent-primary)' }}></i> Real-Time Scheduling Flow
+            </h4>
+            <div className="arch-diagram-box">
+              <div className="arch-flow-row">
+                <div className="arch-step-node">
+                  <strong>Patient UI</strong>
+                  <span>Specialists slot booking portal</span>
+                </div>
+                <div className="arch-step-arrow"><i className="fa-solid fa-arrow-right"></i></div>
+                <div className="arch-step-node">
+                  <strong>Conflict Resolver</strong>
+                  <span>Django concurrency handler</span>
+                </div>
+                <div className="arch-step-arrow"><i className="fa-solid fa-arrow-right"></i></div>
+                <div className="arch-step-node">
+                  <strong>Schedule Database</strong>
+                  <span>MySQL (12+ doctors schedule)</span>
+                </div>
+                <div className="arch-step-arrow"><i className="fa-solid fa-arrow-right"></i></div>
+                <div className="arch-step-node">
+                  <strong>Live Updates</strong>
+                  <span>Dynamic slot rendering under 200ms</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <main className="section-padding page-fade-in">
       <div className="container">
@@ -244,6 +406,8 @@ export default function Projects({ triggerToast }) {
                   {selectedProject.impact}
                 </p>
               </div>
+
+              {renderArchitectureDiagram(selectedProject.id)}
 
               <div style={{ marginBottom: '1.8rem' }}>
                 <h4 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.4rem', color: 'var(--text-primary)' }}>
