@@ -8,7 +8,7 @@ export default function About() {
     { name: "JavaScript (ES6+) & React.js", category: "frontend" },
     { name: "MERN Full-Stack (MongoDB, Express, React, Node.js)", category: "frontend" },
     { name: "HTML5, CSS3 & Tailwind CSS", category: "frontend" },
-    { name: "Java / Kotlin", category: "backend" },
+    { name: "Supabase & Backend Services", category: "backend" },
     { name: "RESTful API Architecture", category: "backend" },
     { name: "Apache PySpark", category: "data" },
     { name: "Databricks", category: "data" },
@@ -82,7 +82,7 @@ export default function About() {
 
         {/* Filtered Skills Grid */}
         <div className="cards-grid-3" style={{ marginBottom: '4rem', minHeight: '180px' }}>
-          {filteredSkills.map((skill, index) => (
+          {filteredSkills.map((skill) => (
             <div 
               key={`${skill.name}-${activeTab}`}
               className="studio-card skill-card-animate" 
@@ -203,7 +203,7 @@ export default function About() {
 
           <div style={{ marginTop: '0.5rem' }}>
             <a 
-              href="https://ijcope.org/" 
+              href="https://ijcope.org/article/panic-button-for-women-safety-using-iot-and-gps/" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="btn btn-outline" 

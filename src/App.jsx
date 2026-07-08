@@ -28,6 +28,14 @@ export default function App() {
   }, [theme]);
 
   useEffect(() => {
+    // Disable automatic browser scroll restoration to prevent landing in the middle on reload
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     if (toast.show) {
       const timer = setTimeout(() => {
         setToast({ show: false, message: '' });

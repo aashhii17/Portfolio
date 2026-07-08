@@ -19,6 +19,22 @@ export default function Projects({ triggerToast }) {
     }
   }, []);
 
+  // Lock background scroll and reset modal scroll to top when opened
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = 'hidden';
+      const timer = setTimeout(() => {
+        const modalBody = document.querySelector('.modal-studio-card');
+        if (modalBody) {
+          modalBody.scrollTop = 0;
+        }
+      }, 50);
+      return () => clearTimeout(timer);
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [selectedProject]);
+
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -231,129 +247,131 @@ export default function Projects({ triggerToast }) {
   };
 
   return (
-    <main className="section-padding page-fade-in">
-      <div className="container">
-        {/* Search & Filter Controls */}
-        <div className="project-search-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-          <input 
-            type="text" 
-            className="search-field" 
-            id="projectSearch" 
-            placeholder="🔍 Search projects by title, technology, or keyword..."
-            value={searchQuery}
-            onChange={handleSearchChange}
-            style={{ flex: '1', minWidth: '260px' }}
-          />
-          
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-            <div className="filter-group">
-              <button 
-                className={`filter-pill ${activeCategory === 'all' ? 'active' : ''}`}
-                onClick={() => handleCategoryClick('all')}
-              >
-                All Projects
-              </button>
-              <button 
-                className={`filter-pill ${activeCategory === 'fullstack' ? 'active' : ''}`}
-                onClick={() => handleCategoryClick('fullstack')}
-              >
-                Full-Stack & Python
-              </button>
-              <button 
-                className={`filter-pill ${activeCategory === 'ai' ? 'active' : ''}`}
-                onClick={() => handleCategoryClick('ai')}
-              >
-                AI & LLM
-              </button>
-              <button 
-                className={`filter-pill ${activeCategory === 'mobile' ? 'active' : ''}`}
-                onClick={() => handleCategoryClick('mobile')}
-              >
-                Mobile & Data
-              </button>
-            </div>
+    <>
+      <main className="section-padding page-fade-in">
+        <div className="container">
+          {/* Search & Filter Controls */}
+          <div className="project-search-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+            <input 
+              type="text" 
+              className="search-field" 
+              id="projectSearch" 
+              placeholder="🔍 Search projects by title, technology, or keyword..."
+              value={searchQuery}
+              onChange={handleSearchChange}
+              style={{ flex: '1', minWidth: '260px' }}
+            />
+            
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+              <div className="filter-group">
+                <button 
+                  className={`filter-pill ${activeCategory === 'all' ? 'active' : ''}`}
+                  onClick={() => handleCategoryClick('all')}
+                >
+                  All Projects
+                </button>
+                <button 
+                  className={`filter-pill ${activeCategory === 'fullstack' ? 'active' : ''}`}
+                  onClick={() => handleCategoryClick('fullstack')}
+                >
+                  Full-Stack & Python
+                </button>
+                <button 
+                  className={`filter-pill ${activeCategory === 'ai' ? 'active' : ''}`}
+                  onClick={() => handleCategoryClick('ai')}
+                >
+                  AI & LLM
+                </button>
+                <button 
+                  className={`filter-pill ${activeCategory === 'mobile' ? 'active' : ''}`}
+                  onClick={() => handleCategoryClick('mobile')}
+                >
+                  Mobile & Data
+                </button>
+              </div>
 
-            {/* Layout Toggle Widget */}
-            <div className="layout-toggle-group" style={{ display: 'flex', gap: '0.2rem', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '0.25rem', background: 'var(--bg-surface)' }}>
-              <button 
-                className={`filter-pill ${layoutMode === 'grid' ? 'active' : ''}`} 
-                style={{ padding: '0.4rem 0.8rem', borderRadius: '6px', border: 'none', margin: 0, fontSize: '0.8rem', cursor: 'pointer' }}
-                onClick={() => setLayoutMode('grid')} 
-                aria-label="Grid View"
-              >
-                <i className="fa-solid fa-table-cells" style={{ marginRight: '0.3rem' }}></i> Grid
-              </button>
-              <button 
-                className={`filter-pill ${layoutMode === 'list' ? 'active' : ''}`} 
-                style={{ padding: '0.4rem 0.8rem', borderRadius: '6px', border: 'none', margin: 0, fontSize: '0.8rem', cursor: 'pointer' }}
-                onClick={() => setLayoutMode('list')} 
-                aria-label="List View"
-              >
-                <i className="fa-solid fa-list" style={{ marginRight: '0.3rem' }}></i> List
-              </button>
+              {/* Layout Toggle Widget */}
+              <div className="layout-toggle-group" style={{ display: 'flex', gap: '0.2rem', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '0.25rem', background: 'var(--bg-surface)' }}>
+                <button 
+                  className={`filter-pill ${layoutMode === 'grid' ? 'active' : ''}`} 
+                  style={{ padding: '0.4rem 0.8rem', borderRadius: '6px', border: 'none', margin: 0, fontSize: '0.8rem', cursor: 'pointer' }}
+                  onClick={() => setLayoutMode('grid')} 
+                  aria-label="Grid View"
+                >
+                  <i className="fa-solid fa-table-cells" style={{ marginRight: '0.3rem' }}></i> Grid
+                </button>
+                <button 
+                  className={`filter-pill ${layoutMode === 'list' ? 'active' : ''}`} 
+                  style={{ padding: '0.4rem 0.8rem', borderRadius: '6px', border: 'none', margin: 0, fontSize: '0.8rem', cursor: 'pointer' }}
+                  onClick={() => setLayoutMode('list')} 
+                  aria-label="List View"
+                >
+                  <i className="fa-solid fa-list" style={{ marginRight: '0.3rem' }}></i> List
+                </button>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Projects Grid / List container */}
-        <div className={layoutMode === 'grid' ? 'cards-grid-3' : 'projects-list-layout'} id="projectsGrid" style={{ marginTop: '1.5rem' }}>
-          {filteredProjects.map((project) => (
-            <div key={project.id} className="project-deep-card">
-              <div className="project-banner-studio">
-                <span className="badge-category">{project.categoryLabel}</span>
-                <i className={`${project.iconClass} banner-icon`}></i>
-              </div>
-              <div className="project-content-deep">
-                <h3>{project.title}</h3>
-                <p className="project-overview">
-                  {project.overview}
-                </p>
-                <ul className="project-features-list">
-                  {project.featuresList.map((feature, i) => (
-                    <li key={i}>{feature}</li>
-                  ))}
-                </ul>
-                <div className="tech-badges-wrap">
-                  {project.techStack.map((tech, i) => (
-                    <span key={i} className="tech-badge">{tech}</span>
-                  ))}
+          {/* Projects Grid / List container */}
+          <div className={layoutMode === 'grid' ? 'cards-grid-3' : 'projects-list-layout'} id="projectsGrid" style={{ marginTop: '1.5rem' }}>
+            {filteredProjects.map((project) => (
+              <div key={project.id} className="project-deep-card">
+                <div className="project-banner-studio">
+                  <span className="badge-category">{project.categoryLabel}</span>
+                  <i className={`${project.iconClass} banner-icon`}></i>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: '1rem' }}>
-                  <button className="btn-details" onClick={() => openModal(project)}>
-                    Read Technical Case Study <i className="fa-solid fa-arrow-right"></i>
-                  </button>
-                  <div style={{ display: 'flex', gap: '0.8rem', alignItems: 'center' }}>
-                    <button 
-                      onClick={() => copyProjectLink(project.id)} 
-                      style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', fontSize: '1.1rem' }} 
-                      title="Copy Share Link"
-                    >
-                      <i className="fa-regular fa-share-from-square"></i>
+                <div className="project-content-deep">
+                  <h3>{project.title}</h3>
+                  <p className="project-overview">
+                    {project.overview}
+                  </p>
+                  <ul className="project-features-list">
+                    {project.featuresList.map((feature, i) => (
+                      <li key={i}>{feature}</li>
+                    ))}
+                  </ul>
+                  <div className="tech-badges-wrap">
+                    {project.techStack.map((tech, i) => (
+                      <span key={i} className="tech-badge">{tech}</span>
+                    ))}
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: '1rem' }}>
+                    <button className="btn-details" onClick={() => openModal(project)}>
+                      Read Technical Case Study <i className="fa-solid fa-arrow-right"></i>
                     </button>
-                    <a 
-                      href={project.repoUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      title="GitHub Repo" 
-                      style={{ color: 'var(--accent-primary)', fontSize: '1.2rem' }}
-                    >
-                      <i className="fa-brands fa-github"></i>
-                    </a>
+                    <div style={{ display: 'flex', gap: '0.8rem', alignItems: 'center' }}>
+                      <button 
+                        onClick={() => copyProjectLink(project.id)} 
+                        style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', fontSize: '1.1rem' }} 
+                        title="Copy Share Link"
+                      >
+                        <i className="fa-regular fa-share-from-square"></i>
+                      </button>
+                      <a 
+                        href={project.repoUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        title="GitHub Repo" 
+                        style={{ color: 'var(--accent-primary)', fontSize: '1.2rem' }}
+                      >
+                        <i className="fa-brands fa-github"></i>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
 
-          {filteredProjects.length === 0 && (
-            <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>
-              <h3>No projects found matching your search.</h3>
-            </div>
-          )}
+            {filteredProjects.length === 0 && (
+              <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>
+                <h3>No projects found matching your search.</h3>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      </main>
 
-      {/* Modal Overlay */}
+      {/* Modal Overlay is direct sibling to main to prevent stacking context clipping */}
       {selectedProject && (
         <div className="modal-overlay active" id="projectModal" onClick={handleBackdropClick}>
           <div className="modal-studio-card">
@@ -437,6 +455,6 @@ export default function Projects({ triggerToast }) {
           </div>
         </div>
       )}
-    </main>
+    </>
   );
 }

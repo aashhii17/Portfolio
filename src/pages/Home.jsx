@@ -2,9 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { projectsData } from '../data/projectsData';
 
+const roles = ["Full Stack Developer", "Python Developer", "Data Engineer"];
+
 export default function Home({ triggerToast }) {
   // Typewriter effect
-  const roles = ["Full Stack Developer", "Python Developer", "Data Engineer"];
   const [roleIndex, setRoleIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -92,7 +93,7 @@ export default function Home({ triggerToast }) {
         break;
       case 'skills':
         response = [
-          "Languages: Python, JavaScript (ES6+), Java, SQL",
+          "Languages: Python, JavaScript (ES6+), SQL",
           "Backend/Database: Django, Supabase, REST APIs",
           "Data/ETL: Apache PySpark, Databricks, SQL Databases",
           "Frontend: React.js, Tailwind CSS, HTML5/CSS3",
@@ -360,7 +361,7 @@ export default function Home({ triggerToast }) {
 
             <div style={{ marginTop: '0.5rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               <a 
-                href="https://ijcope.org/" 
+                href="https://ijcope.org/article/panic-button-for-women-safety-using-iot-and-gps/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="btn btn-outline" 

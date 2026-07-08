@@ -79,11 +79,11 @@ export const projectsData = [
     id: "womens-safety",
     title: "GuardianAI – Women's Safety App with AI Threat Detection",
     category: "mobile ai",
-    badgeLabel: "Android / Java / Kotlin / Firebase / Google Maps API",
-    categoryLabel: "Android / Java / Kotlin / Firebase",
+    badgeLabel: "Android / Firebase / Google Maps API",
+    categoryLabel: "Android / Firebase / Location Services",
     iconClass: "fa-solid fa-shield-cat",
     repoUrl: "https://github.com/aashhii17/GuardianAI",
-    overview: "Developed a native Android safety application focused on emergency protection, immediate location broadcasting, and automated threat notifications using Java/Kotlin, XML, Firebase, Google Maps API, GPS location services, and local SQLite data caching.",
+    overview: "Developed a native Android safety application focused on emergency protection, immediate location broadcasting, and automated threat notifications using Android SDK, XML, Firebase, Google Maps API, GPS location services, and local SQLite data caching.",
     problemSolved: "In high-risk emergency scenarios, individuals may be unable to unlock their device, dial phone numbers, or type manual messages. This app bridges critical seconds by introducing a one-tap panic trigger that instantly broadcasts live GPS coordinates and automated emergency SOS alerts.",
     architectureDetails: [
       "One-Tap Panic Emergency Trigger: Instant SOS activation sending SMS messages and voice call alerts to pre-configured emergency contacts.",
@@ -91,7 +91,7 @@ export const projectsData = [
       "AI-Based Movement Risk Detection: Sensor algorithms monitoring rapid device acceleration or sudden impacts to detect potential falls or emergency events.",
       "Firebase Cloud Sync & SQLite Backup: Dual storage strategy ensuring emergency contacts are accessible offline via SQLite when cellular data is unavailable."
     ],
-    techStack: ["Java / Kotlin", "Android SDK", "Firebase Realtime DB", "Google Maps API", "GPS Services", "SQLite", "XML UI"],
+    techStack: ["Android SDK", "Firebase Realtime DB", "Google Maps API", "GPS Services", "SQLite", "XML UI"],
     impact: "Created a dependable, offline-resilient emergency assistant mobile app providing immediate peace of mind and swift alert dispatching.",
     featuresList: [
       "One-tap panic SOS trigger executing instant emergency contact SMS/calls",
