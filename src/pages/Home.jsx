@@ -56,10 +56,14 @@ export default function Home({ triggerToast }) {
   // CLI Terminal states & logic
   const [terminalHistory, setTerminalHistory] = useState([
     { text: "Welcome to Aashi's Developer Console v1.0.0.", type: "system" },
-    { text: "Type 'help' to view all available commands.", type: "system" },
+    { text: "Type 'help' to view all available commands (including easter egg 'matrix'!).", type: "system" },
   ]);
   const [terminalInput, setTerminalInput] = useState('');
+  const [commandHistory, setCommandHistory] = useState([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
+  const [matrixActive, setMatrixActive] = useState(false);
   const terminalEndRef = useRef(null);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
     if (terminalEndRef.current) {
@@ -67,19 +71,142 @@ export default function Home({ triggerToast }) {
     }
   }, [terminalHistory]);
 
+  // Matrix falling rain animation effect
+  useEffect(() => {
+    if (!matrixActive) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    // Match dimensions to display size
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight || 260;
+
+    const columns = Math.floor(canvas.width / 14) || 20;
+    const yPositions = Array(columns).fill(0);
+
+    let animationFrameId;
+    const draw = () => {
+      ctx.fillStyle = 'rgba(10, 10, 12, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#10b981'; // Sleek green instead of generic green
+      ctx.font = '13px Courier New, monospace';
+
+      for (let i = 0; i < yPositions.length; i++) {
+        const char = String.fromCharCode(33 + Math.floor(Math.random() * 93));
+        const x = i * 14;
+        const y = yPositions[i];
+        ctx.fillText(char, x, y);
+
+        if (y > 100 + Math.random() * 10000) {
+          yPositions[i] = 0;
+        } else {
+          yPositions[i] += 14;
+        }
+      }
+      animationFrameId = requestAnimationFrame(draw);
+    };
+
+    draw();
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [matrixActive]);
+
+  // Escape key handler to close Matrix mode
+  useEffect(() => {
+    const handleGlobalKeyDown = (e) => {
+      if (e.key === 'Escape' && matrixActive) {
+        setMatrixActive(false);
+        setTerminalHistory(prev => [
+          ...prev,
+          { text: "Matrix mode deactivated. Welcome back.", type: "system" }
+        ]);
+      }
+    };
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, [matrixActive]);
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      const input = terminalInput.trim().toLowerCase();
+      if (!input) return;
+      const commands = ['help', 'about', 'skills', 'projects', 'clear', 'matrix'];
+      const matches = commands.filter(c => c.startsWith(input));
+      if (matches.length === 1) {
+        setTerminalInput(matches[0]);
+      } else if (matches.length > 1) {
+        setTerminalHistory(prev => [
+          ...prev,
+          { text: `visitor@aashi-portfolio:~$ ${terminalInput}`, type: 'command' },
+          { text: `Matches: ${matches.join(', ')}`, type: 'system' }
+        ]);
+      }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (commandHistory.length > 0) {
+        const nextIdx = historyIndex + 1;
+        if (nextIdx < commandHistory.length) {
+          setHistoryIndex(nextIdx);
+          setTerminalInput(commandHistory[commandHistory.length - 1 - nextIdx]);
+        }
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const nextIdx = historyIndex - 1;
+      if (nextIdx >= 0) {
+        setHistoryIndex(nextIdx);
+        setTerminalInput(commandHistory[commandHistory.length - 1 - nextIdx]);
+      } else {
+        setHistoryIndex(-1);
+        setTerminalInput('');
+      }
+    }
+  };
+
   const handleTerminalSubmit = (e) => {
     e.preventDefault();
-    const cmd = terminalInput.trim().toLowerCase();
-    if (!cmd) return;
+    const cmd = terminalInput.trim();
+    const cleanCmd = cmd.toLowerCase();
+    if (!cleanCmd) return;
+
+    // Track command history
+    setCommandHistory(prev => [...prev, cmd]);
+    setHistoryIndex(-1);
+
+    if (cleanCmd === 'clear') {
+      setTerminalHistory([]);
+      setTerminalInput('');
+      return;
+    }
+
+    if (cleanCmd === 'matrix') {
+      setMatrixActive(true);
+      setTerminalInput('');
+      setTerminalHistory(prev => [
+        ...prev,
+        { text: `visitor@aashi-portfolio:~$ ${cmd}`, type: 'command' },
+        { text: "Entering Matrix Digital Rain Mode... Click terminal or press ESC to exit.", type: "system" }
+      ]);
+      return;
+    }
 
     let response = [];
-    switch (cmd) {
+    let isJsx = false;
+    let jsxContent = null;
+
+    switch (cleanCmd) {
       case 'help':
         response = [
           "Available Commands:",
           "  about    - Display Aashi's background overview",
           "  skills   - List technical competencies",
-          "  projects - Summarize core projects & systems",
+          "  projects - Summarize core systems with interactive links",
+          "  matrix   - Launch developer terminal easter egg",
           "  clear    - Clear console logs"
         ];
         break;
@@ -101,27 +228,48 @@ export default function Home({ triggerToast }) {
         ];
         break;
       case 'projects':
-        response = [
-          "Core Projects:",
-          "  • Alaski AI: Multi-LLM MERN chatbot with API streaming",
-          "  • EcoWatt: Django energy forecast platform with 10K+ logs",
-          "  • ShelfWise: MySQL library tracker (10K+ book entries)",
-          "  • GuardianAI: Android offline-resilient SOS assistant",
-          "  • Medislot: Multi-user doctor schedule booker"
-        ];
+        isJsx = true;
+        jsxContent = (
+          <div style={{ marginTop: '0.4rem', marginBottom: '0.4rem', fontFamily: 'monospace', lineHeight: '1.5' }}>
+            <span style={{ color: 'var(--accent-primary)', fontWeight: 'bold' }}>Core Projects Catalog:</span>
+            <div style={{ paddingLeft: '0.5rem', marginTop: '0.2rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+              <div>
+                • <strong style={{ color: '#fff' }}>Alaski AI</strong>: Multi-LLM chatbot platform. 
+                <a href="https://github.com/aashhii17/AIStudio" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.8rem', color: '#10b981', textDecoration: 'underline' }}>[GitHub]</a>
+              </div>
+              <div>
+                • <strong style={{ color: '#fff' }}>EcoWatt</strong>: AI energy monitoring system.
+                <a href="https://github.com/aashhii17/EcoWatt" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.8rem', color: '#10b981', textDecoration: 'underline' }}>[GitHub]</a>
+                <a href="https://ecowatt-29k4.onrender.com/" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.6rem', color: '#10b981', textDecoration: 'underline' }}>[Live Site]</a>
+              </div>
+              <div>
+                • <strong style={{ color: '#fff' }}>ShelfWise</strong>: Library management platform.
+                <a href="https://github.com/aashhii17/ShelfWise" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.8rem', color: '#10b981', textDecoration: 'underline' }}>[GitHub]</a>
+                <a href="https://shelfwise-xm8q.onrender.com/" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.6rem', color: '#10b981', textDecoration: 'underline' }}>[Live Site]</a>
+              </div>
+              <div>
+                • <strong style={{ color: '#fff' }}>GuardianAI</strong>: Women safety mobile client.
+                <a href="https://github.com/aashhii17/GuardianAI" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.8rem', color: '#10b981', textDecoration: 'underline' }}>[GitHub]</a>
+              </div>
+              <div>
+                • <strong style={{ color: '#fff' }}>Medislot</strong>: Medical scheduling system.
+                <a href="https://github.com/aashhii17/Medislot" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.8rem', color: '#10b981', textDecoration: 'underline' }}>[GitHub]</a>
+                <a href="https://medislot-1-rjv9.onrender.com" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.6rem', color: '#10b981', textDecoration: 'underline' }}>[Live Site]</a>
+              </div>
+            </div>
+          </div>
+        );
         break;
-      case 'clear':
-        setTerminalHistory([]);
-        setTerminalInput('');
-        return;
       default:
-        response = [`Command not found: '${cmd}'. Type 'help' for options.`];
+        response = [`Command not found: '${cleanCmd}'. Type 'help' for options.`];
     }
 
     setTerminalHistory(prev => [
       ...prev,
-      { text: `visitor@aashi-portfolio:~$ ${terminalInput}`, type: 'command' },
-      ...response.map(line => ({ text: line, type: 'output' }))
+      { text: `visitor@aashi-portfolio:~$ ${cmd}`, type: 'command' },
+      ...(isJsx 
+        ? [{ jsx: jsxContent, type: 'output' }] 
+        : response.map(line => ({ text: line, type: 'output' })))
     ]);
     setTerminalInput('');
   };
@@ -232,8 +380,8 @@ export default function Home({ triggerToast }) {
               </div>
             </div>
 
-            {/* CLI Developer Terminal */}
-            <div className="cli-terminal" style={{ margin: 0, height: '100%', display: 'flex', flexDirection: 'column' }}>
+             {/* CLI Developer Terminal */}
+            <div className="cli-terminal" style={{ margin: 0, height: '100%', display: 'flex', flexDirection: 'column', position: 'relative' }}>
               <div className="terminal-header">
                 <div className="terminal-dots">
                   <span className="terminal-dot red"></span>
@@ -242,10 +390,27 @@ export default function Home({ triggerToast }) {
                 </div>
                 <span className="terminal-title">aashi-developer-console</span>
               </div>
-              <div className="terminal-body" style={{ flex: 1, minHeight: '260px' }}>
+              <div className="terminal-body" style={{ flex: 1, minHeight: '260px', position: 'relative', overflowY: 'auto' }}>
+                {matrixActive && (
+                  <div 
+                    onClick={() => {
+                      setMatrixActive(false);
+                      setTerminalHistory(prev => [
+                        ...prev,
+                        { text: "Matrix mode deactivated. Welcome back.", type: "system" }
+                      ]);
+                    }} 
+                    style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: '#0a0a0c', zIndex: 10, cursor: 'pointer' }}
+                  >
+                    <canvas ref={canvasRef} style={{ display: 'block', width: '100%', height: '100%' }} />
+                    <div style={{ position: 'absolute', bottom: '10px', left: '10px', color: '#10b981', fontSize: '0.8rem', fontFamily: 'monospace', zIndex: 11, background: 'rgba(0,0,0,0.7)', padding: '4px 8px', borderRadius: '4px', border: '1px solid var(--border-color)' }}>
+                      Matrix Mode Active. Press ESC or click terminal to exit.
+                    </div>
+                  </div>
+                )}
                 {terminalHistory.map((line, idx) => (
                   <div key={idx} className="terminal-line" style={{ color: line.type === 'command' ? '#10b981' : line.type === 'system' ? '#f59e0b' : '#38bdf8', marginBottom: '0.4rem', fontSize: '0.85rem' }}>
-                    {line.text}
+                    {line.jsx ? line.jsx : line.text}
                   </div>
                 ))}
                 <form onSubmit={handleTerminalSubmit} className="terminal-input-row" style={{ display: 'flex', alignItems: 'center' }}>
@@ -255,6 +420,7 @@ export default function Home({ triggerToast }) {
                     className="terminal-input" 
                     value={terminalInput}
                     onChange={(e) => setTerminalInput(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     autoComplete="off"
                     aria-label="Terminal input"
                     style={{ flex: 1, background: 'transparent', border: 'none', color: '#38bdf8', outline: 'none', fontFamily: 'monospace', fontSize: '0.85rem' }}

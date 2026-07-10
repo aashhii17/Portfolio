@@ -33,6 +33,7 @@ export const projectsData = [
     categoryLabel: "Python / Django / PostgreSQL / AI",
     iconClass: "fa-solid fa-bolt",
     repoUrl: "https://github.com/aashhii17/EcoWatt",
+    liveUrl: "https://ecowatt-29k4.onrender.com/",
     overview: "Engineered an intelligent, full-stack energy management and monitoring platform leveraging Python, Django, PostgreSQL, HTML5, CSS3, JavaScript, and Chart.js. The solution allows commercial and residential administrators to track granular appliance-level consumption, forecast upcoming monthly billing costs using machine learning models, and identify power inefficiency hotspots.",
     problemSolved: "Consumers and facility managers often lack real-time visibility into appliance-wise electricity consumption until the end-of-month utility bill arrives. This system solves unmonitored power waste by delivering live analytics dashboards, automated peak usage warnings, and algorithmic bill estimations.",
     architectureDetails: [
@@ -58,6 +59,7 @@ export const projectsData = [
     categoryLabel: "Python / Django / MySQL",
     iconClass: "fa-solid fa-book-open",
     repoUrl: "https://github.com/aashhii17/ShelfWise",
+    liveUrl: "https://shelfwise-xm8q.onrender.com/",
     overview: "Designed and deployed 'ShelfWise', an end-to-end digital library management solution engineered to automate library operations, member cataloging, book issue/return workflows, automated overdue fine assessments, and role-based administrative access control.",
     problemSolved: "Manual library tracking leads to misplaced inventory, untracked overdue fines, delays in book distribution, and administrative overhead. ShelfWise digitizes the entire lifecycle of book distribution with instant ISBN lookup, member activity tracking, and automated fine calculation.",
     architectureDetails: [
@@ -108,6 +110,7 @@ export const projectsData = [
     categoryLabel: "Python / Django / MySQL",
     iconClass: "fa-solid fa-user-doctor",
     repoUrl: "https://github.com/aashhii17/Medislot",
+    liveUrl: "https://medislot-1-rjv9.onrender.com",
     overview: "Constructed a comprehensive healthcare management and doctor appointment booking application utilizing Python, Django, MySQL, HTML5, CSS3, and JavaScript. The system connects patients with healthcare providers, simplifies appointment scheduling, and maintains secure digital medical history archives.",
     problemSolved: "Long clinic wait times and phone-based scheduling cause patient frustration and operational bottlenecks for clinic staff. The Doctor Appointment System provides a centralized digital portal for real-time doctor slot booking and electronic health record management.",
     architectureDetails: [

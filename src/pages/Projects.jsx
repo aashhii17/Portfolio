@@ -356,6 +356,17 @@ export default function Projects({ triggerToast }) {
                       >
                         <i className="fa-brands fa-github"></i>
                       </a>
+                      {project.liveUrl && (
+                        <a 
+                          href={project.liveUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          title="Live Demo" 
+                          style={{ color: 'var(--accent-primary)', fontSize: '1.2rem' }}
+                        >
+                          <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -440,8 +451,13 @@ export default function Projects({ triggerToast }) {
                 </div>
               </div>
 
-              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                <a href={selectedProject.repoUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+               <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                {selectedProject.liveUrl && (
+                  <a href={selectedProject.liveUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ background: 'linear-gradient(135deg, var(--accent-primary) 0%, #10b981 100%)', border: 'none' }}>
+                    <i className="fa-solid fa-earth-americas"></i> Visit Live Project
+                  </a>
+                )}
+                <a href={selectedProject.repoUrl} target="_blank" rel="noopener noreferrer" className={selectedProject.liveUrl ? "btn btn-outline" : "btn btn-primary"}>
                   <i className="fa-brands fa-github"></i> View Repository on GitHub
                 </a>
                 <button onClick={() => copyProjectLink(selectedProject.id)} className="btn btn-outline">
