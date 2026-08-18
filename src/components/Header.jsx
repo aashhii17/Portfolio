@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
-export default function Header({ theme, toggleTheme }) {
+export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -14,9 +14,9 @@ export default function Header({ theme, toggleTheme }) {
 
   return (
     <header className="site-header">
-      <div class="header-inner">
+      <div className="header-inner">
         <Link to="/" className="brand-link" onClick={closeMobileMenu}>
-          <span className="brand-avatar">AP</span>
+          <img src="/logo.svg" alt="Professions and Jobs Icon Logo" className="brand-logo-img" />
           <span>Aashi Pandey</span>
         </Link>
 
@@ -71,18 +71,6 @@ export default function Header({ theme, toggleTheme }) {
         </nav>
 
         <div className="header-actions">
-          <button 
-            className="theme-btn" 
-            id="themeBtn" 
-            aria-label="Toggle Theme"
-            onClick={toggleTheme}
-          >
-            {theme === 'dark' ? (
-              <i className="fa-solid fa-sun"></i>
-            ) : (
-              <i className="fa-solid fa-moon"></i>
-            )}
-          </button>
           <Link to="/contact" className="cta-btn" onClick={closeMobileMenu}>Hire Me</Link>
           <button 
             className="mobile-toggle" 

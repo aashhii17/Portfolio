@@ -10,22 +10,12 @@ import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 
 export default function App() {
-  // Theme state logic
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('aashi_studio_theme') || 'light';
-  });
-
   // Toast notification state
   const [toast, setToast] = useState({ show: false, message: '' });
 
   const triggerToast = (message) => {
     setToast({ show: true, message });
   };
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('aashi_studio_theme', theme);
-  }, [theme]);
 
   useEffect(() => {
     // Disable automatic browser scroll restoration to prevent landing in the middle on reload
@@ -44,18 +34,10 @@ export default function App() {
     }
   }, [toast.show]);
 
-  const toggleTheme = () => {
-    setTheme(prev => {
-      const next = prev === 'dark' ? 'light' : 'dark';
-      triggerToast(`Switched to ${next === 'dark' ? 'Midnight Dark' : 'Studio Light'} mode`);
-      return next;
-    });
-  };
-
   return (
     <Router>
       <ScrollProgress />
-      <Header theme={theme} toggleTheme={toggleTheme} />
+      <Header />
       
       <Routes>
         <Route path="/" element={<Home triggerToast={triggerToast} />} />

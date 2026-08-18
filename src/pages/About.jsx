@@ -10,8 +10,9 @@ export default function About() {
     { name: "HTML5, CSS3 & Tailwind CSS", category: "frontend" },
     { name: "Supabase & Backend Services", category: "backend" },
     { name: "RESTful API Architecture", category: "backend" },
-    { name: "Apache PySpark", category: "data" },
-    { name: "Databricks", category: "data" },
+    { name: "Docker & Kubernetes Containerization", category: "backend" },
+    { name: "Microsoft Azure Services", category: "data" },
+    { name: "Apache PySpark & Databricks (Foundations)", category: "data" },
     { name: "AWS Cloud Infrastructure", category: "data" },
     { name: "Scalable ETL Pipelines", category: "data" },
     { name: "SQL, PostgreSQL & MySQL", category: "data" },
@@ -36,7 +37,7 @@ export default function About() {
             Professional Biography
           </h2>
           <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', fontSize: '1.05rem' }}>
-            I am a <strong>B.Tech Information Technology Graduate (2022–2026)</strong> from <strong>Indore Institute of Science and Technology (IIST)</strong>. I specialize in bridging the gap between full-stack web applications, backend system logic, and cloud data engineering pipelines. Through multiple hands-on internships across Python development, ETL pipelines, and data analytics, I have developed strong software engineering practices, database optimization techniques, and responsive user interface design.
+            I am a <strong>B.Tech Information Technology Graduate (2022–2026)</strong> from <strong>Indore Institute of Science and Technology (IIST)</strong>. I specialize in building full-stack web applications, RESTful APIs, containerized microservices, and cloud solutions using the <strong>MERN Stack, Python/Django, Docker, Kubernetes, PostgreSQL, and Azure Services</strong>, alongside foundational knowledge in <strong>Apache PySpark & Databricks</strong>. Through multiple hands-on internships, I have developed strong software engineering practices, database optimization techniques, and responsive user interface design.
           </p>
         </div>
 

@@ -81,8 +81,11 @@ export default function Contact({ triggerToast }) {
 
     setSubmitting(true);
 
+    let supabaseSuccess = false;
+    let netlifySuccess = false;
+
+    // 1. Attempt Supabase submission
     try {
-      // 1. Store in Supabase database
       const { error } = await supabase
         .from('contact_messages')
         .insert([
@@ -94,32 +97,40 @@ export default function Contact({ triggerToast }) {
           }
         ]);
 
-      if (error) {
-        throw error;
+      if (!error) {
+        supabaseSuccess = true;
+      } else {
+        console.warn("Supabase submission notice:", error.message || error);
       }
+    } catch (supaErr) {
+      console.warn("Supabase exception:", supaErr);
+    }
 
-      // 2. Submit to Netlify Forms (to send email notifications)
-      const encode = (data) => {
-        return Object.keys(data)
-          .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-          .join("&");
-      };
+    // 2. Attempt Netlify Forms submission
+    const encode = (data) => {
+      return Object.keys(data)
+        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+        .join("&");
+    };
 
-      try {
-        await fetch("/", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: encode({
-            "form-name": "contact",
-            ...formData
-          })
-        });
-      } catch (netlifyErr) {
-        console.warn("Netlify Forms submission failed, but message was saved to Supabase:", netlifyErr);
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode({
+          "form-name": "contact",
+          ...formData
+        })
+      });
+      if (res.ok) {
+        netlifySuccess = true;
       }
+    } catch (netlifyErr) {
+      console.warn("Netlify Forms submission error:", netlifyErr);
+    }
 
-      triggerToast("Thank you! Your message has been sent to Aashi.");
-
+    if (supabaseSuccess || netlifySuccess) {
+      triggerToast("Thank you! Your message has been sent successfully.");
       setFormData({
         name: '',
         email: '',
@@ -127,12 +138,13 @@ export default function Contact({ triggerToast }) {
         message: ''
       });
       setErrors({});
-    } catch (error) {
-      triggerToast("Failed to send message. Please try again later.");
-      console.error("Supabase submission error:", error);
-    } finally {
-      setSubmitting(false);
+    } else {
+      // Fallback to mailto so the user's message is never blocked or lost
+      const mailtoUrl = `mailto:aashipndy1710@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`From: ${formData.name} (${formData.email})\n\n${formData.message}`)}`;
+      window.location.href = mailtoUrl;
+      triggerToast("Opening email client to send message to aashipndy1710@gmail.com...");
     }
+    setSubmitting(false);
   };
 
   return (
@@ -280,7 +292,7 @@ export default function Contact({ triggerToast }) {
         <div className="cards-grid-3">
           <div className="studio-card">
             <h3>What roles are you targetting?</h3>
-            <p>Full Stack Developer (Python/React), Python Developer (Django), and Data Engineer (Apache PySpark, Databricks, AWS ETL pipelines).</p>
+            <p>Full Stack Developer (MERN / React / Python), Software & Cloud Engineer (REST APIs, Docker, Kubernetes, Azure Services, PostgreSQL), and Data Engineering (PySpark & Databricks foundations).</p>
           </div>
 
           <div className="studio-card">

@@ -17,16 +17,16 @@ export default function Experience() {
                 <span className="date-badge"><i className="fa-solid fa-calendar-days"></i> Jun 2026 – Present</span>
               </div>
               <p className="exp-desc">
-                Building a strong foundation in Python programming, object-oriented programming, data structures, and algorithms through practical software projects. Expanding core expertise in Data Engineering by leveraging <strong>Apache PySpark, Databricks, and AWS</strong> to construct distributed data processing workflows, scalable ETL pipelines, and cloud data solutions.
+                Engineered full-stack web solutions and RESTful API backends using the <strong>MERN Stack (MongoDB, Express.js, React.js, Node.js)</strong> and <strong>PostgreSQL</strong>. Implemented containerization and orchestration workflows with <strong>Docker and Kubernetes</strong>, managed cloud infrastructure on <strong>Microsoft Azure</strong>, and acquired foundational knowledge in <strong>Apache PySpark and Databricks</strong>.
               </p>
               <div className="tech-badges-wrap">
-                <span className="tech-badge">Python</span>
-                <span className="tech-badge">Django</span>
-                <span className="tech-badge">Apache PySpark</span>
-                <span className="tech-badge">Databricks</span>
-                <span className="tech-badge">AWS Cloud</span>
-                <span className="tech-badge">ETL Pipelines</span>
-                <span className="tech-badge">Data Structures</span>
+                <span className="tech-badge">MERN Stack</span>
+                <span className="tech-badge">RESTful APIs</span>
+                <span className="tech-badge">PostgreSQL</span>
+                <span className="tech-badge">Docker</span>
+                <span className="tech-badge">Kubernetes</span>
+                <span className="tech-badge">Microsoft Azure</span>
+                <span className="tech-badge">PySpark & Databricks</span>
               </div>
             </div>
           </div>
