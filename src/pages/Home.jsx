@@ -235,26 +235,26 @@ export default function Home({ triggerToast }) {
             <div style={{ paddingLeft: '0.5rem', marginTop: '0.2rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
               <div>
                 • <strong style={{ color: '#fff' }}>Alaski AI</strong>: Multi-LLM chatbot platform. 
-                <a href="https://github.com/aashhii17/AIStudio" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.8rem', color: '#10b981', textDecoration: 'underline' }}>[GitHub]</a>
+                <a href="https://github.com/aashhii17/AIStudio" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.8rem', color: 'var(--accent-primary)', textDecoration: 'underline' }}>[GitHub]</a>
               </div>
               <div>
                 • <strong style={{ color: '#fff' }}>EcoWatt</strong>: AI energy monitoring system.
-                <a href="https://github.com/aashhii17/EcoWatt" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.8rem', color: '#10b981', textDecoration: 'underline' }}>[GitHub]</a>
-                <a href="https://ecowatt-29k4.onrender.com/" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.6rem', color: '#10b981', textDecoration: 'underline' }}>[Live Site]</a>
+                <a href="https://github.com/aashhii17/EcoWatt" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.8rem', color: 'var(--accent-primary)', textDecoration: 'underline' }}>[GitHub]</a>
+                <a href="https://ecowatt-29k4.onrender.com/" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.6rem', color: 'var(--accent-primary)', textDecoration: 'underline' }}>[Live Site]</a>
               </div>
               <div>
                 • <strong style={{ color: '#fff' }}>ShelfWise</strong>: Library management platform.
-                <a href="https://github.com/aashhii17/ShelfWise" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.8rem', color: '#10b981', textDecoration: 'underline' }}>[GitHub]</a>
-                <a href="https://shelfwise-xm8q.onrender.com/" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.6rem', color: '#10b981', textDecoration: 'underline' }}>[Live Site]</a>
+                <a href="https://github.com/aashhii17/ShelfWise" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.8rem', color: 'var(--accent-primary)', textDecoration: 'underline' }}>[GitHub]</a>
+                <a href="https://shelfwise-xm8q.onrender.com/" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.6rem', color: 'var(--accent-primary)', textDecoration: 'underline' }}>[Live Site]</a>
               </div>
               <div>
                 • <strong style={{ color: '#fff' }}>GuardianAI</strong>: Women safety mobile client.
-                <a href="https://github.com/aashhii17/GuardianAI" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.8rem', color: '#10b981', textDecoration: 'underline' }}>[GitHub]</a>
+                <a href="https://github.com/aashhii17/GuardianAI" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.8rem', color: 'var(--accent-primary)', textDecoration: 'underline' }}>[GitHub]</a>
               </div>
               <div>
                 • <strong style={{ color: '#fff' }}>Medislot</strong>: Medical scheduling system.
-                <a href="https://github.com/aashhii17/Medislot" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.8rem', color: '#10b981', textDecoration: 'underline' }}>[GitHub]</a>
-                <a href="https://medislot-1-rjv9.onrender.com" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.6rem', color: '#10b981', textDecoration: 'underline' }}>[Live Site]</a>
+                <a href="https://github.com/aashhii17/Medislot" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.8rem', color: 'var(--accent-primary)', textDecoration: 'underline' }}>[GitHub]</a>
+                <a href="https://medislot-1-rjv9.onrender.com" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.6rem', color: 'var(--accent-primary)', textDecoration: 'underline' }}>[Live Site]</a>
               </div>
             </div>
           </div>
@@ -403,18 +403,18 @@ export default function Home({ triggerToast }) {
                     style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: '#0a0a0c', zIndex: 10, cursor: 'pointer' }}
                   >
                     <canvas ref={canvasRef} style={{ display: 'block', width: '100%', height: '100%' }} />
-                    <div style={{ position: 'absolute', bottom: '10px', left: '10px', color: '#10b981', fontSize: '0.8rem', fontFamily: 'monospace', zIndex: 11, background: 'rgba(0,0,0,0.7)', padding: '4px 8px', borderRadius: '4px', border: '1px solid var(--border-color)' }}>
+                    <div style={{ position: 'absolute', bottom: '10px', left: '10px', color: 'var(--accent-primary)', fontSize: '0.8rem', fontFamily: 'monospace', zIndex: 11, background: 'rgba(24,21,20,0.85)', padding: '4px 8px', borderRadius: '4px', border: '1px solid #38322E' }}>
                       Matrix Mode Active. Press ESC or click terminal to exit.
                     </div>
                   </div>
                 )}
                 {terminalHistory.map((line, idx) => (
-                  <div key={idx} className="terminal-line" style={{ color: line.type === 'command' ? '#10b981' : line.type === 'system' ? '#f59e0b' : '#38bdf8', marginBottom: '0.4rem', fontSize: '0.85rem' }}>
+                  <div key={idx} className="terminal-line" style={{ color: line.type === 'command' ? 'var(--accent-primary)' : line.type === 'system' ? '#E5A84B' : '#F7F3ED', marginBottom: '0.4rem', fontSize: '0.85rem' }}>
                     {line.jsx ? line.jsx : line.text}
                   </div>
                 ))}
                 <form onSubmit={handleTerminalSubmit} className="terminal-input-row" style={{ display: 'flex', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.85rem', color: '#10b981', marginRight: '0.4rem' }}>visitor@aashi-portfolio:~$</span>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--accent-primary)', marginRight: '0.4rem' }}>visitor@aashi-portfolio:~$</span>
                   <input 
                     type="text" 
                     className="terminal-input" 
@@ -423,7 +423,7 @@ export default function Home({ triggerToast }) {
                     onKeyDown={handleKeyDown}
                     autoComplete="off"
                     aria-label="Terminal input"
-                    style={{ flex: 1, background: 'transparent', border: 'none', color: '#38bdf8', outline: 'none', fontFamily: 'monospace', fontSize: '0.85rem' }}
+                    style={{ flex: 1, background: 'transparent', border: 'none', color: '#F7F3ED', outline: 'none', fontFamily: 'monospace', fontSize: '0.85rem' }}
                   />
                 </form>
                 <div ref={terminalEndRef} />

@@ -16,7 +16,7 @@ export default function Header() {
     <header className="site-header">
       <div className="header-inner">
         <Link to="/" className="brand-link" onClick={closeMobileMenu}>
-          <img src="/logo.svg" alt="Professions and Jobs Icon Logo" className="brand-logo-img" />
+          <img src="/logo.svg" alt="Aashi Pandey Logo" className="brand-logo-img" />
           <span>Aashi Pandey</span>
         </Link>
 

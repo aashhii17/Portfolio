@@ -62,16 +62,6 @@ export default function Projects({ triggerToast }) {
     }
   };
 
-  const copyProjectLink = (projectId) => {
-    const shareUrl = `${window.location.origin}/projects?id=${projectId}`;
-    navigator.clipboard.writeText(shareUrl)
-      .then(() => {
-        triggerToast("Direct project case-study link copied to clipboard!");
-      })
-      .catch(() => {
-        triggerToast("Error copying link.");
-      });
-  };
 
   // Filter projects based on search query and category pill
   const filteredProjects = projectsData.filter((project) => {
@@ -340,13 +330,6 @@ export default function Projects({ triggerToast }) {
                       Read Technical Case Study <i className="fa-solid fa-arrow-right"></i>
                     </button>
                     <div style={{ display: 'flex', gap: '0.8rem', alignItems: 'center' }}>
-                      <button 
-                        onClick={() => copyProjectLink(project.id)} 
-                        style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', fontSize: '1.1rem' }} 
-                        title="Copy Share Link"
-                      >
-                        <i className="fa-regular fa-share-from-square"></i>
-                      </button>
                       <a 
                         href={project.repoUrl} 
                         target="_blank" 
@@ -453,16 +436,13 @@ export default function Projects({ triggerToast }) {
 
                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                 {selectedProject.liveUrl && (
-                  <a href={selectedProject.liveUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ background: 'linear-gradient(135deg, var(--accent-primary) 0%, #10b981 100%)', border: 'none' }}>
+                  <a href={selectedProject.liveUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ background: 'var(--gradient-brand)', border: 'none' }}>
                     <i className="fa-solid fa-earth-americas"></i> Visit Live Project
                   </a>
                 )}
                 <a href={selectedProject.repoUrl} target="_blank" rel="noopener noreferrer" className={selectedProject.liveUrl ? "btn btn-outline" : "btn btn-primary"}>
                   <i className="fa-brands fa-github"></i> View Repository on GitHub
                 </a>
-                <button onClick={() => copyProjectLink(selectedProject.id)} className="btn btn-outline">
-                  <i className="fa-regular fa-copy"></i> Copy Share Link
-                </button>
                 <a href="https://www.linkedin.com/in/aashi-pandey-1324b025b" target="_blank" rel="noopener noreferrer" className="btn btn-outline">
                   <i className="fa-brands fa-linkedin"></i> LinkedIn Profile
                 </a>
